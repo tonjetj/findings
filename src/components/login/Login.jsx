@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { getAccessToken, setAccessToken } from '../api/accessToken';
 import { BASE_URL } from '../api/apiBase';
 
 const schema = yup.object().shape({
@@ -30,6 +31,10 @@ function LoginForm() {
 
       const responseData = await response.json();
       console.log('User logged in successfully:', responseData);
+
+      // Store the access token in local storage
+      setAccessToken(responseData.accessToken);
+
       // Continue with other actions
     } catch (error) {
       console.error('Failed to login:', error);
@@ -45,7 +50,7 @@ function LoginForm() {
         {...register('email')}
       />
       {errors.email && <p>{errors.email.message}</p>}
-      
+
       <input
         type="password"
         placeholder="Password"
