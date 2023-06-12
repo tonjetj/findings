@@ -1,1 +1,1 @@
-This is current work on the registration form.
+This is current work on using login information and rendering it to a dashboard page. 
